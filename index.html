@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "y49g04uc02");
+  </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Bill & Expense Tracker | Study Mode</title>
@@ -552,7 +559,14 @@
 
   function tickClock() {
     var now = new Date();
-    el.clockTime.textContent = pad(now.getHours()) + ':' + pad(now.getMinutes());
+    var hours = now.getHours();
+var minutes = now.getMinutes();
+var seconds = now.getSeconds();
+var ampm = hours >= 12 ? 'PM' : 'AM';
+hours = hours % 12;
+hours = hours ? hours : 12;
+el.clockTime.textContent = pad(hours) + ':' + pad(minutes) + ':' + pad(seconds) + ' ' + ampm;
+    
     el.clockDate.textContent = now.toLocaleDateString('bn-BD', { day: 'numeric', month: 'short' });
 
     if (studyState.active && studyState.endTime) {
@@ -604,7 +618,7 @@
         osc.start();
         osc.stop(ctx.currentTime + 0.2);
         count++;
-        if (count < 3) setTimeout(beep, 300);
+        if (count < 20) setTimeout(beep, 900);
       }
       beep();
     } catch (err) {
