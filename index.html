@@ -559,7 +559,12 @@
 
   function tickClock() {
     var now = new Date();
-    el.clockTime.textContent = pad(now.getHours()) + ':' + pad(now.getMinutes());
+    var hours = now.getHours();
+var minutes = pad(now.getMinutes());
+var ampm = hours >= 12 ? 'PM' : 'AM';
+hours = hours % 12;
+hours = hours ? hours : 12;
+el.clockTime.textContent = pad(hours) + ':' + minutes + ' ' + ampm;
     el.clockDate.textContent = now.toLocaleDateString('bn-BD', { day: 'numeric', month: 'short' });
 
     if (studyState.active && studyState.endTime) {
@@ -611,7 +616,7 @@
         osc.start();
         osc.stop(ctx.currentTime + 0.2);
         count++;
-        if (count < 3) setTimeout(beep, 300);
+        if (count < 10) setTimeout(beep, 300);
       }
       beep();
     } catch (err) {
